@@ -1,7 +1,9 @@
-// "use client"
+"use client"
+import SetColor from "@/components/products/SetColor"
+import { CartProductType, SelectedImgType } from "@/types"
+// import { CartProductType, SelectedImgType } from "@/types"
 import { Rating } from "@mui/material"
-import Image from "next/image"
-import React from "react"
+import React, { useCallback, useState } from "react"
 
 interface ProductDetailProps {
   data: any
@@ -12,11 +14,32 @@ const Horizontal = () => {
 }
 
 const ProductDetails = ({ data }: ProductDetailProps) => {
-  console.log(data)
+  // console.log(data)
+
+  const [cartProduct, setCartProduct] = useState<CartProductType[]>({
+    id: data.id,
+    name: data.name,
+    description: data.description,
+    category: data.category,
+    brand: data.brand,
+    selectedImg: { ...data.images[0] },
+    quantity: 1,
+    price: data.price,
+  })
 
   const productRating =
     data.reviews.reduce((acc: number, item: any) => item.rating + acc, 0) /
     data.reviews.length
+
+  const handleColorSelect = useCallback(
+    (colorValue: SelectedImgType) => {
+      setCartProduct((prev) => {
+        return { ...prev, selectedImg: colorValue }
+      })
+      console.log(colorValue)
+    },
+    [cartProduct.selectedImg],
+  )
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -50,7 +73,11 @@ const ProductDetails = ({ data }: ProductDetailProps) => {
         </div>
 
         <Horizontal />
-        <div>color</div>
+        <SetColor
+          cartProduct={cartProduct}
+          images={data.images}
+          handelColorSelect={handleColorSelect}
+        />
         <Horizontal />
 
         <Horizontal />

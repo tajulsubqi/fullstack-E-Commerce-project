@@ -12,7 +12,7 @@ const data = Product
 console.log(data)
 
 const Products = ({ params }: { params: IParams }) => {
-  console.log("params", Product)
+  // console.log("params", Product)
   return (
     <div className="p-8">
       <Container>
