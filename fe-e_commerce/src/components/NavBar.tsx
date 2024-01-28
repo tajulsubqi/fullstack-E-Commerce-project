@@ -14,13 +14,14 @@ const Navbar = () => {
       <div className="sticky top-0 z-10 flex items-center bg-dark text-white py-4 px-7 justify-between">
         <div>
           <Link className={redressed.className} href={"/"}>
-            <p className="font-medium text-2xl">E ~ Commerce</p>
+            <p className="font-medium text-2xl">Vvingzzz </p>
           </Link>
         </div>
         <div className="hidden md:block ">Search</div>
 
         <div className=" flex items-center gap-4">
           <div>Category</div>
+          <div>cart(0)</div>
           <div className="flex items-center gap-2 relative cursor-pointer">
             {/* cart(0) */}
             <IoCart size={28} />

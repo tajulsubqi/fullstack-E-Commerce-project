@@ -15,7 +15,7 @@ const Banner = () => {
 
         <div className="w-1/3 relative aspect-video">
           <Image
-            src="/img/banner-image.png"
+            src="https://res.cloudinary.com/dji2n22ew/image/upload/v1706411272/e-commerce-apps/banner-image_ppqd7z.png"
             fill
             alt="banner"
             className="object-contain"
