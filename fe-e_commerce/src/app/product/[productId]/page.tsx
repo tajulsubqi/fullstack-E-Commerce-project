@@ -1,15 +1,25 @@
-import React from 'react';
+"use client"
+import Container from "@/components/Container"
+import React from "react"
+import ProductDetail from "./ProductDetails"
+import { Product } from "../../../../utils/Product"
 
-interface Propsparams {
-  ProductId?: string
+interface IParams {
+  productId?: string
 }
 
-const Products = ({ params }: { params: Propsparams }) => {
-  return (
-    <div>
-      Product
-    </div>
-  );
-};
+const data = Product
+console.log(data)
 
-export default Products;
+const Products = ({ params }: { params: IParams }) => {
+  console.log("params", Product)
+  return (
+    <div className="p-8">
+      <Container>
+        <ProductDetail data={Product} />
+      </Container>
+    </div>
+  )
+}
+
+export default Products
