@@ -1,5 +1,6 @@
 "use client"
 import SetColor from "@/components/products/SetColor"
+import SetQuantity from "@/components/products/SetQuantity"
 import { CartProductType, SelectedImgType } from "@/types"
 // import { CartProductType, SelectedImgType } from "@/types"
 import { Rating } from "@mui/material"
@@ -13,9 +14,8 @@ const Horizontal = () => {
   return <hr className="w-[30%] my-2" />
 }
 
-const ProductDetails = ({ data }: ProductDetailProps) => {
+const ProductDetails: React.FC<ProductDetailProps> = ({ data }) => {
   // console.log(data)
-
   const [cartProduct, setCartProduct] = useState<CartProductType[]>({
     id: data.id,
     name: data.name,
@@ -40,6 +40,20 @@ const ProductDetails = ({ data }: ProductDetailProps) => {
     },
     [cartProduct.selectedImg],
   )
+
+  const handleQtyIncrease = useCallback(() => {
+    setCartProduct((prev) => {
+      return { ...prev, quantity: prev.quantity + 1 }
+    })
+  }, [cartProduct])
+
+  const handleQtyDecrease = useCallback(() => {
+    setCartProduct((prev) => {
+      if (prev.quantity === 1) return prev
+
+      return { ...prev, quantity: prev.quantity - 1 }
+    })
+  }, [cartProduct])
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -81,7 +95,12 @@ const ProductDetails = ({ data }: ProductDetailProps) => {
         <Horizontal />
 
         <Horizontal />
-        <div>quantity</div>
+        {/* <div>quantity</div> */}
+        <SetQuantity
+          cartProduct={cartProduct}
+          handleQtyIncrease={handleQtyIncrease}
+          handleQtyDecrease={handleQtyDecrease}
+        />
         <Horizontal />
 
         <div>add to cart</div>
