@@ -1,22 +1,20 @@
-"use client"
+import React, { useCallback, useState } from "react"
+import { Rating } from "@mui/material"
 import SetColor from "@/components/products/SetColor"
 import SetQuantity from "@/components/products/SetQuantity"
 import { CartProductType, SelectedImgType } from "@/types"
-// import { CartProductType, SelectedImgType } from "@/types"
-import { Rating } from "@mui/material"
-import React, { useCallback, useState } from "react"
+import Button from "@/components/products/Button"
 
 interface ProductDetailProps {
   data: any
 }
 
-const Horizontal = () => {
+const Horizontal: React.FC = () => {
   return <hr className="w-[30%] my-2" />
 }
 
 const ProductDetails: React.FC<ProductDetailProps> = ({ data }) => {
-  // console.log(data)
-  const [cartProduct, setCartProduct] = useState<CartProductType[]>({
+  const [cartProduct, setCartProduct] = useState<CartProductType>({
     id: data.id,
     name: data.name,
     description: data.description,
@@ -41,6 +39,7 @@ const ProductDetails: React.FC<ProductDetailProps> = ({ data }) => {
     [cartProduct.selectedImg],
   )
 
+  // handle qty tambah dan kurang
   const handleQtyIncrease = useCallback(() => {
     setCartProduct((prev) => {
       return { ...prev, quantity: prev.quantity + 1 }
@@ -95,7 +94,6 @@ const ProductDetails: React.FC<ProductDetailProps> = ({ data }) => {
         <Horizontal />
 
         <Horizontal />
-        {/* <div>quantity</div> */}
         <SetQuantity
           cartProduct={cartProduct}
           handleQtyIncrease={handleQtyIncrease}
@@ -103,7 +101,9 @@ const ProductDetails: React.FC<ProductDetailProps> = ({ data }) => {
         />
         <Horizontal />
 
-        <div>add to cart</div>
+        <div className="max-w-[300px]">
+          <Button label="Add To Cart" onClick={() => {}} />
+        </div>
       </div>
     </div>
   )
