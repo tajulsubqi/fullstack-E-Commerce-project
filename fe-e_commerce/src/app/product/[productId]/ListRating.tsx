@@ -1,5 +1,6 @@
 "use client"
 
+import Avatar from "@/components/Avatar"
 import Heading from "@/components/Heading"
 import { Rating } from "@mui/material"
 import moment from "moment"
@@ -17,14 +18,11 @@ const ListRating = ({ product }: ListRatingProps) => {
         {product.reviews &&
           product.reviews.map((review: any) => {
             return (
-              <div
-                key={review.id}
-                className="
-          max-w-300px"
-              >
+              <div key={review.id} className="max-w-300px">
                 <div className="flex gap-2 items-center">
-                  <div>Avatar</div>
-                  <div className="font-semibold">{review?.user.name}</div>
+                  <Avatar src={review?.user.image} />
+
+                  <div className="font-semibold">{review?.user.name}A</div>
                   <div className="font-light">{moment(review.createdAt).fromNow()}</div>
                 </div>
 
@@ -33,7 +31,7 @@ const ListRating = ({ product }: ListRatingProps) => {
                 </div>
                 <div className="ml-2">
                   {review.comment}
-                  <hr className="mt-4 mb-4"/>
+                  <hr className="mt-4 mb-4" />
                 </div>
               </div>
             )

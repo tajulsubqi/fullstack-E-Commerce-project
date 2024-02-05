@@ -2,7 +2,6 @@
 import Link from "next/link"
 import React from "react"
 import { Redressed } from "next/font/google"
-import MyButton from "./MyButton"
 import { IoCart } from "react-icons/io5"
 
 //font

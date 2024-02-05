@@ -74,7 +74,7 @@ const ProductDetails: React.FC<ProductDetailProps> = ({ data }) => {
         </div>
 
         <Horizontal />
-        <div className="text-justify">{data.description}HH</div>
+        <div className="text-justify">{data.description}</div>
         <Horizontal />
 
         <div>
