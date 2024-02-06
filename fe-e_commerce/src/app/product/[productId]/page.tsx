@@ -9,11 +9,7 @@ interface IParams {
   productId?: string
 }
 
-const data = Product
-console.log(data)
-
 const Products = ({ params }: { params: IParams }) => {
-  // console.log("params", Product)
   return (
     <div className="p-8">
       <Container>
@@ -22,7 +18,7 @@ const Products = ({ params }: { params: IParams }) => {
           <div>List</div>
 
           <div>
-            <ListRating product={Product}/>
+            <ListRating product={Product} />
           </div>
         </div>
       </Container>

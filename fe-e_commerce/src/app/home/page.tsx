@@ -1,4 +1,3 @@
-"use client"
 import Banner from "@/components/Banner"
 import Container from "@/components/Container"
 import React from "react"
@@ -7,6 +6,7 @@ import ProductCard from "@/components/products/ProductCard"
 
 const HomePage = () => {
   // console.log(productsData)
+
   return (
     <Container>
       <div className="mt-8">
