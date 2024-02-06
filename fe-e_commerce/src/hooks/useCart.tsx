@@ -1,7 +1,7 @@
 "use client"
 
 import { CartProductType } from "@/types"
-import { createContext, useCallback, useContext, useState } from "react"
+import { createContext, useCallback, useContext, useEffect, useState } from "react"
 
 type CartContextType = {
   cartTotalQty: number
@@ -19,6 +19,13 @@ export const CartContextProvider = (props: Props) => {
   const [cartTotalQty, setCartTotalQty] = useState(0)
   const [cartProducts, setCartProducts] = useState<CartProductType | null[]>([])
 
+  useEffect(() => {
+    const cartItems: any = localStorage.getItem("eShopCartItems")
+    const cProducts: CartProductType = JSON.parse(cartItems)
+
+    setCartProducts(cProducts)
+  }, [])
+
   const handleAddProductToCart = useCallback((product: CartProductType) => {
     setCartProducts((prev) => {
       let updatedCart
@@ -28,6 +35,8 @@ export const CartContextProvider = (props: Props) => {
       } else {
         updatedCart = [product]
       }
+
+      localStorage.setItem("eShopCartItems", JSON.stringify(updatedCart))
 
       return updatedCart
     })
