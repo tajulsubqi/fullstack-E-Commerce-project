@@ -8,7 +8,7 @@ import { MdArrowBack } from "react-icons/md"
 import ItemContent from "./ItemContent"
 
 const CartClient = () => {
-  const { cartProducts } = useCart()
+  const { cartProducts, handleClearCart } = useCart()
 
   if (!cartProducts || cartProducts.length === 0) {
     return (
@@ -39,7 +39,7 @@ const CartClient = () => {
           cartProducts.map((item) => <ItemContent key={item.id} item={item} />)}
         <div className="col-span-5 border-t-[1.5px] border-slate-300 py-4 flex justify-between">
           <div className="w-[90px]">
-            <Button label="Clear Cart" small outline />
+            <Button onClick={() => handleClearCart()} label="Clear Cart" small outline />
           </div>
 
           <div className="text-sm flex flex-col gap-1">
