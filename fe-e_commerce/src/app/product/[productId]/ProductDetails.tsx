@@ -120,7 +120,7 @@ const ProductDetails: React.FC<ProductDetailProps> = ({ data }) => {
               <span>Product added to cart</span>
             </p>
             <div className="max-w-[300px]">
-              <Button label="View Cartart" outline onClick={() => router.push("/cart")} />
+              <Button label="View Cart" outline onClick={() => router.push("/cart")} />
             </div>
           </>
         ) : (
