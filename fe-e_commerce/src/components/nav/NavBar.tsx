@@ -1,17 +1,14 @@
-"use client"
 import Link from "next/link"
-import React from "react"
 import { Redressed } from "next/font/google"
-import { IoCart } from "react-icons/io5"
 import CartCount from "./CartCount"
-import { useCart } from "@/hooks/useCart"
 import UserMenu from "./UserMenu"
+import getCurrentUser from "../../../actions/getCurrentUser"
 
 //font
 const redressed = Redressed({ subsets: ["latin"], weight: ["400"] })
 
-const Navbar = () => {
-  const { cartTotalQty } = useCart()
+const Navbar = async () => {
+  const currentUser = await getCurrentUser()
 
   return (
     <>
@@ -29,7 +26,8 @@ const Navbar = () => {
           </div>
 
           <div>
-            <UserMenu />
+            {/* <CartCount /> */}
+            <UserMenu currentUser={currentUser} />
           </div>
         </div>
       </div>

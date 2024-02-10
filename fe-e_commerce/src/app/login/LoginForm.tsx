@@ -38,13 +38,13 @@ const LoginForm = () => {
       }
 
       if (callback?.error) {
-        toast.error(callback.error)
+        toast.error("Login error")
       }
     })
   }
 
   return (
-    <div>
+    <form>
       <h1 className="text-2xl font-bold text-center mb-5">Login V~Store</h1>
 
       <Button label="Continue width Google" outline icon={AiOutlineGoogle} />
@@ -70,6 +70,7 @@ const LoginForm = () => {
 
         <Button
           onClick={handleSubmit(onSubmit)}
+          type="submit"
           label={isLoading ? "loading..." : "Login"}
         />
 
@@ -83,7 +84,7 @@ const LoginForm = () => {
           </Link>
         </p>
       </div>
-    </div>
+    </form>
   )
 }
 

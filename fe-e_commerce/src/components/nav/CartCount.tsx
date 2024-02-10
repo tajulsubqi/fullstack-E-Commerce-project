@@ -13,9 +13,12 @@ const CartCount = () => {
       <div className="text-3xl">
         <IoCart />
       </div>
-      <span className="absolute -top-2 -right-2 text-xs bg-red-500 text-white rounded-full flex items-center justify-center w-6 h-6">
-        {cartTotalQty}
-      </span>
+
+      {cartTotalQty !== 0 && (
+        <span className="absolute -top-2 -right-2 text-xs bg-red-500 text-white rounded-full flex items-center justify-center w-5 h-5">
+          {cartTotalQty}
+        </span>
+      )}
     </div>
   )
 }
