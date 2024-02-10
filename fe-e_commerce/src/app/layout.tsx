@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { Poppins } from "next/font/google"
 import "./globals.css"
-import Navbar from "@/components/NavBar"
+import Navbar from "@/components/nav/NavBar"
 import Footer from "@/components/footer/Footer"
 import { CartProvider } from "../../providers/CartProvider"
 import { Toaster } from "react-hot-toast"

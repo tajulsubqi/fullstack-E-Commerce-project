@@ -6,9 +6,10 @@ import Link from "next/link"
 import React from "react"
 import { MdArrowBack } from "react-icons/md"
 import ItemContent from "./ItemContent"
+import { formatPriceUSD } from "../../../utils/formatPrice"
 
 const CartClient = () => {
-  const { cartProducts, handleClearCart } = useCart()
+  const { cartProducts, handleClearCart, cartTotalAmount } = useCart()
 
   if (!cartProducts || cartProducts.length === 0) {
     return (
@@ -29,10 +30,10 @@ const CartClient = () => {
       <Heading title="Shopping Cart" center />
       <div>
         <div className="grid grid-cols-5 text-xs gap-4 pb-2 items-center mt-8">
-          <div className="col-span-2 justify-self-start">PRODUCT</div>
-          <div className="justify-self-center">PRICE</div>
-          <div className="justify-self-center">QUANTITY</div>
-          <div className="justify-self-end">TOTAL</div>
+          <div className="col-span-2 justify-self-start font-semibold">PRODUCT</div>
+          <div className="justify-self-center font-semibold">PRICE</div>
+          <div className="justify-self-center font-semibold">QUANTITY</div>
+          <div className="justify-self-end font-semibold">TOTAL</div>
         </div>
 
         {cartProducts &&
@@ -45,7 +46,7 @@ const CartClient = () => {
           <div className="text-sm flex flex-col gap-1">
             <div className="flex justify-between w-full font-semibold">
               <span>Subtotal</span>
-              <span>$1000</span>
+              <span>{formatPriceUSD(cartTotalAmount)}</span>
             </div>
             <p className="text-slate-500">Taxes and shipping calculate at checkout</p>
 

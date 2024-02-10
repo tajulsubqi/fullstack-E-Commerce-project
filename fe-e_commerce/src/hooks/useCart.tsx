@@ -1,12 +1,12 @@
 "use client"
 
 import { CartProductType } from "@/types"
-import { log } from "console"
 import { createContext, useCallback, useContext, useEffect, useState } from "react"
 import toast from "react-hot-toast"
 
 type CartContextType = {
   cartTotalQty: number
+  cartTotalAmount: number
   cartProducts: CartProductType[] | null
   handleAddProductToCart: (product: CartProductType) => void
   handleRemoveProductFromCart: (product: CartProductType) => void
@@ -24,14 +24,14 @@ interface Props {
 export const CartContextProvider = (props: Props) => {
   const [cartTotalQty, setCartTotalQty] = useState(0)
   const [cartTotalAmount, setCartTotalAmount] = useState(0)
-  const [cartProducts, setCartProducts] = useState<CartProductType | null[]>([])
+  const [cartProducts, setCartProducts] = useState<CartProductType[]>([])
 
   console.log("qty", cartTotalQty)
   console.log("amount", cartTotalAmount)
 
   useEffect(() => {
     const cartItems: any = localStorage.getItem("eShopCartItems")
-    const cProducts: CartProductType = JSON.parse(cartItems)
+    const cProducts: CartProductType[] = JSON.parse(cartItems)
     setCartProducts(cProducts)
   }, [])
 
@@ -124,7 +124,9 @@ export const CartContextProvider = (props: Props) => {
 
       if (cartProducts) {
         const updatedCart = [...cartProducts]
-        const existingIndex = cartProducts.findIndex((item) => item.id === product.id)
+        const existingIndex = cartProducts.findIndex(
+          (item: any) => item.id === product.id,
+        )
 
         if (existingIndex > -1) {
           updatedCart[existingIndex].quantity--
@@ -138,7 +140,7 @@ export const CartContextProvider = (props: Props) => {
 
   //clear cart
   const handleClearCart = useCallback(() => {
-    setCartProducts(null)
+    setCartProducts([])
     setCartTotalQty(0)
     localStorage.setItem("eShopCartItems", JSON.stringify(null))
   }, [cartProducts])
@@ -151,6 +153,7 @@ export const CartContextProvider = (props: Props) => {
     handleCartQtyIncrease,
     handleCartQtyDecrease,
     handleClearCart,
+    cartTotalAmount,
   }
 
   return <CartContext.Provider value={value}>{props.children}</CartContext.Provider>
