@@ -1,17 +1,20 @@
 "use client"
 import Input from "@/components/inputs/Input"
 import Button from "@/components/products/Button"
+import { safeUser } from "@/types"
 import { signIn } from "next-auth/react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { FieldValues, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 import { AiOutlineGoogle } from "react-icons/ai"
 
-const LoginForm = () => {
-  const router = useRouter()
+interface LoginFormProps {
+  currentUser: safeUser | null
+}
 
+const LoginForm: React.FC<LoginFormProps> = ({ currentUser }) => {
   const [isLoading, setIsLoading] = useState(false)
   const {
     register,
@@ -23,6 +26,15 @@ const LoginForm = () => {
       password: "",
     },
   })
+
+  const router = useRouter()
+
+  useEffect(() => {
+    if (currentUser) {
+      router.push("/cart")
+      router.refresh()
+    }
+  }, [])
 
   const onSubmit = (data: FieldValues) => {
     setIsLoading(true)
@@ -41,6 +53,10 @@ const LoginForm = () => {
         toast.error("Login error")
       }
     })
+  }
+
+  if (currentUser) {
+    return <p className="text-center">Logged in. Redirecting....</p>
   }
 
   return (

@@ -10,7 +10,7 @@ import { safeUser } from "@/types"
 import { IoLogOutOutline } from "react-icons/io5"
 
 interface userMenuProps {
-  currentUser: safeUser
+  currentUser: safeUser | null
 }
 
 const UserMenu: React.FC<userMenuProps> = ({ currentUser }) => {

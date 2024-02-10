@@ -1,18 +1,21 @@
 "use client"
 import Input from "@/components/inputs/Input"
 import Button from "@/components/products/Button"
+import { safeUser } from "@/types"
 import axios from "axios"
 import { signIn } from "next-auth/react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { FieldValues, useForm, SubmitHandler } from "react-hook-form"
 import toast from "react-hot-toast"
 import { AiOutlineGoogle } from "react-icons/ai"
 
-const RegisterForm = () => {
-  const router = useRouter()
+interface RegisterFormProps {
+  currentUser: safeUser | null
+}
 
+const RegisterForm: React.FC<RegisterFormProps> = ({ currentUser }) => {
   const [isLoading, setIsLoading] = useState(false)
   const {
     register,
@@ -26,9 +29,17 @@ const RegisterForm = () => {
     },
   })
 
+  const router = useRouter()
+
+  useEffect(() => {
+    if (currentUser) {
+      router.push("/cart")
+      router.refresh()
+    }
+  }, [])
+
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true)
-    console.log(data)
 
     axios
       .post("/api/register", data)
@@ -55,6 +66,10 @@ const RegisterForm = () => {
       .finally(() => {
         setIsLoading(false)
       })
+  }
+
+  if (currentUser) {
+    return <p className="text-center">Logged in. Redirecting....</p>
   }
 
   return (
