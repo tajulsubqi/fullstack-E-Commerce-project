@@ -11,10 +11,11 @@ import toast from "react-hot-toast"
 import { AiOutlineGoogle } from "react-icons/ai"
 
 interface LoginFormProps {
-  currentUser: safeUser | null
+  user: safeUser | null
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ currentUser }) => {
+const LoginForm: React.FC<LoginFormProps> = ({ user }) => {
+  console.log("userLogin", user)
   const [isLoading, setIsLoading] = useState(false)
   const {
     register,
@@ -30,7 +31,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ currentUser }) => {
   const router = useRouter()
 
   useEffect(() => {
-    if (currentUser) {
+    if (user) {
       router.push("/cart")
       router.refresh()
     }
@@ -50,20 +51,25 @@ const LoginForm: React.FC<LoginFormProps> = ({ currentUser }) => {
       }
 
       if (callback?.error) {
-        toast.error("Login error")
+        toast.error("Login failed")
       }
     })
   }
 
-  if (currentUser) {
+  if (user) {
     return <p className="text-center">Logged in. Redirecting....</p>
   }
 
   return (
-    <form>
+    <div>
       <h1 className="text-2xl font-bold text-center mb-5">Login V~Store</h1>
 
-      <Button label="Continue width Google" outline icon={AiOutlineGoogle} />
+      <Button
+        onClick={() => signIn("google")}
+        label="Continue width Google"
+        outline
+        icon={AiOutlineGoogle}
+      />
       <hr className="bg-slate-300 w-[300px] md:w-[570px] h-[1px] my-4" />
       <div className="flex flex-col gap-6">
         <Input
@@ -86,7 +92,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ currentUser }) => {
 
         <Button
           onClick={handleSubmit(onSubmit)}
-          type="submit"
           label={isLoading ? "loading..." : "Login"}
         />
 
@@ -100,7 +105,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ currentUser }) => {
           </Link>
         </p>
       </div>
-    </form>
+    </div>
   )
 }
 

@@ -8,7 +8,7 @@ import getCurrentUser from "../../../actions/getCurrentUser"
 const redressed = Redressed({ subsets: ["latin"], weight: ["400"] })
 
 const Navbar = async () => {
-  const currentUser = await getCurrentUser()
+  const user = await getCurrentUser()
 
   return (
     <>
@@ -27,7 +27,7 @@ const Navbar = async () => {
 
           <div>
             {/* <CartCount /> */}
-            <UserMenu currentUser={currentUser} />
+            <UserMenu user={user} />
           </div>
         </div>
       </div>

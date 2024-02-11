@@ -12,10 +12,11 @@ import toast from "react-hot-toast"
 import { AiOutlineGoogle } from "react-icons/ai"
 
 interface RegisterFormProps {
-  currentUser: safeUser | null
+  user: safeUser
 }
 
-const RegisterForm: React.FC<RegisterFormProps> = ({ currentUser }) => {
+const RegisterForm: React.FC<RegisterFormProps> = ({ user }) => {
+  console.log("userRegister", user)
   const [isLoading, setIsLoading] = useState(false)
   const {
     register,
@@ -32,7 +33,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ currentUser }) => {
   const router = useRouter()
 
   useEffect(() => {
-    if (currentUser) {
+    if (user) {
       router.push("/cart")
       router.refresh()
     }
@@ -68,16 +69,22 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ currentUser }) => {
       })
   }
 
-  if (currentUser) {
+  if (user) {
     return <p className="text-center">Logged in. Redirecting....</p>
   }
 
   return (
     <div>
-      {/* <Heading title="Sign up for Vvingzz~Store" /> */}
       <h1 className="text-2xl font-bold text-center mb-4">Sign up for V~Store</h1>
 
-      <Button label="Sign up with Google" outline icon={AiOutlineGoogle} />
+      <Button
+        onClick={() => {
+          signIn("google")
+        }}
+        label="Sign up with Google"
+        outline
+        icon={AiOutlineGoogle}
+      />
       <hr className="bg-slate-300 w-[300px] md:w-[570px] h-[1px] my-4" />
 
       <form className="flex flex-col gap-6">

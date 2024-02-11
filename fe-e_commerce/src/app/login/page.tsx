@@ -5,13 +5,12 @@ import LoginForm from "./LoginForm"
 import getCurrentUser from "../../../actions/getCurrentUser"
 
 const page = async () => {
-  const currentUser = await getCurrentUser()
-  console.log(currentUser)
+  const user = await getCurrentUser()
 
   return (
     <Container>
       <FormWrap>
-        <LoginForm currentUser={currentUser} />
+        <LoginForm user={user} />
       </FormWrap>
     </Container>
   )
